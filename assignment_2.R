@@ -10,7 +10,7 @@ library(raster)
 rasterOptions(maxmemory = 1e-6)
 
 # Define the folder that contains your data...
-data.path <- 'O:/WS1718_MSc-EO/02_Session_2/data/'
+data.path <- '<PATH_TO_YOUR_DATA_FOLDER>'
 
 #############################################################################
 # 2)
