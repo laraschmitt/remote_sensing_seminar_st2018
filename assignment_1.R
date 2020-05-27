@@ -20,7 +20,7 @@ library(rgdal)
 rasterOptions(maxmemory = 1e-6)
 
 # Define the folder that contains your data...
-data.path <- 'L:/STUDIUM_Global_Change_Geography/M5_Earth_Observation/Seminar/S01/data/'
+data.path <- '<PATH_TO_YOUR_DATA_FOLDER>'
 
 #############################################################################
 # 1)	Create a stack for each of the 3 Landsat images. Include only the 
