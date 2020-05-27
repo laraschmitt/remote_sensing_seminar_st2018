@@ -1,6 +1,6 @@
 ######################################################################
 # MSc Earth Observation Exercise 7
-# [Derenthal, Schmitt, Streif]
+# [Schmitt]
 ######################################################################
 
 ######################################################################
@@ -17,7 +17,7 @@ library (reshape2)
 rasterOptions(maxmemory = 1e6)
 
 # Define the folder that contains your data...
-data.path <- "O:/Student_Data/Schmitt_Lara/S07/data/"
+data.path <- '<PATH_TO_YOUR_DATA_FOLDER>'
 
 folders <- dir(data.path)
 list_ts_stacks = list.files(paste0(data.path, folders[3]), full.names = TRUE)
