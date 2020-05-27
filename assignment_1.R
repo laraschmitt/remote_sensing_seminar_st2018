@@ -2,12 +2,15 @@
 # MSc Earth Observation Exercise 01
 # [Schmitt]
 #############################################################################
+
 # Handling raster datasets in R 
 # the Landsat images provided come as single-band files and should be stacked
 # for further analysis
 # for stacking, all input files must have a matching extent and the 
 # identical projection
+
 #############################################################################
+
 # Load packages, use install.packages('packagename') to install if needed
 library(raster)
 library(rgdal)
@@ -19,7 +22,6 @@ rasterOptions(maxmemory = 1e-6)
 # Define the folder that contains your data...
 data.path <- 'L:/STUDIUM_Global_Change_Geography/M5_Earth_Observation/Seminar/S01/data/'
 
-
 #############################################################################
 # 1)	Create a stack for each of the 3 Landsat images. Include only the 
 # following bands: blue, green, red, nIR, swIR 1, swiR 2 (in this order)
@@ -29,15 +31,11 @@ data.path <- 'L:/STUDIUM_Global_Change_Geography/M5_Earth_Observation/Seminar/S0
 #band numbers: 2, 3, 4, 5, 6, 7
 
 # list all folders in data.path
-
 paths <-list.dirs(data.path, full.names = T)
 
 # or using regular expressions
 bands <-list.files(paste0(data.path, paths[1]),pattern="B[2-7].tif$", full.names=T) # $ (dollar sign): means that there should not be anything after TIF
 stack <-stack(bands)
-
-
-
 
 
 folders <- dir(data.path)
@@ -53,6 +51,7 @@ stack03 <- stack(list.files(paste0(data.path, folders[3]), full.names = TRUE)[4:
 # identify the common extent (xmin, xmax, ymin, ymax in projected coordinates)
 # of all three images. 
 #############################################################################
+
 e1 <- extent(x = stack01)
 e2 <- extent(x = stack02)
 e3 <- extent(x = stack03)
@@ -81,6 +80,7 @@ stack_a <- stack(stack01_crop_a,stack02_crop_a,stack03_crop_a)
 # 3b)	Crop each of the image stacks from 1) to the following custom extent:
 # xmin = 250000, xmax = 375000, ymin = 5589000, ymax = 5653000
 #############################################################################
+
 extent_b <- extent(c(250000,375000,5589000,5653000))
 
 stack01_crop_b <- crop(stack01, extent_b)
@@ -93,6 +93,7 @@ stack_b <- stack(stack01_crop_b,stack02_crop_b,stack03_crop_b)
 # 4) Write the cropped stacks from 3a and 3b to your personal folder. Use the 
 # ENVI" format and the appropriate datatype. 
 #############################################################################
+
 setwd('L:/STUDIUM_Global_Change_Geography/M5_Earth_Observation/Seminar/S01/')
 writeRaster(stack_a, "Stack_A", format = "ENVI", overwrite=T)
 writeRaster(stack_b, "Stack_B", format = "ENVI", overwrite=T)
