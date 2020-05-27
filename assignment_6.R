@@ -1,6 +1,6 @@
 #############################################################################
 # MSc Earth Observation Exercise 6
-# [Schmitt, Lara]
+# [Schmitt]
 #############################################################################
 
 # Load all packages you need here...
@@ -13,7 +13,7 @@ library(randomForest)
 rasterOptions(maxmemory = 1e6)
 
 # Define the folder that contains your data...
-data.path <- "L:/STUDIUM_Global_Change_Geography/Earth_Observation/S06/data/"
+data.path <- '<PATH_TO_YOUR_DATA_FOLDER>'
 
 #Load classified map from 2010 
 folders <- dir(data.path)
@@ -47,15 +47,15 @@ plot(TC_mask)
 #############################################################################
 # 2)
 #############################################################################
-td <- readOGR(dsn = "L:/STUDIUM_Global_Change_Geography/Earth_Observation/S06/data/td_S06", 
-                 layer = "TD_06")
+td <- readOGR(dsn = '<PATH_TO_YOUR_DATA_FOLDER>', 
+                 layer = '<LAYER_NAME>')
 
 #############################################################################
 # 3) 
 #############################################################################
 NDVI = stack(list2[2])
 TC = stack(list2[4],list2[6],list2[8])
-classes2010 = stack("L:/STUDIUM_Global_Change_Geography/Earth_Observation/S06/data/spectemp/NDVI/NDVI_mean.img")
+classes2010 = stack('<PATH_TO_YOUR_DATA_FOLDER>')
 
 #Extract the values at training sites from NDVI and TC (all 30 images)
 td_NDVI = raster::extract(NDVI, td, sp =T)
@@ -133,17 +133,17 @@ list_tcb = list.files(paste0(data.path, folders[3], "/"), full.names = TRUE)[2]
 list_tcg = list.files(paste0(data.path, folders[3], "/"), full.names = TRUE)[3]
 list_tcw = list.files(paste0(data.path, folders[3], "/"), full.names = TRUE)[4]
 
-ndvi_mean = stack("L:/STUDIUM_Global_Change_Geography/Earth_Observation/S06/data/data/spectemp/NDVI/NDVI_mean.img")
-ndvi_iqr = stack("L:/STUDIUM_Global_Change_Geography/Earth_Observation/S06/data/spectemp/NDVI/NDVI_iqr.img")
+ndvi_mean = stack('<PATH_TO_YOUR_DATA_FOLDER>')
+ndvi_iqr = stack('<PATH_TO_YOUR_DATA_FOLDER>')
 
-tcb_p75 = stack("L:/STUDIUM_Global_Change_Geography/Earth_Observation/S06/data/data/spectemp/TCB/TCB_p75.img")
-tcb_p25 = stack("L:/STUDIUM_Global_Change_Geography/Earth_Observation/S06/data/data/spectemp/TCB/TCB_p25.img")
+tcb_p75 = stack('<PATH_TO_YOUR_DATA_FOLDER>')
+tcb_p25 = stack('<PATH_TO_YOUR_DATA_FOLDER>')
 
-tcg_std = stack("L:/STUDIUM_Global_Change_Geography/Earth_Observation/S06/data/spectemp/TCG/TCG_std.img")
-tcg_min = stack("L:/STUDIUM_Global_Change_Geography/Earth_Observation/S06/data/spectemp/TCG/TCG_min.img")
+tcg_std = stack('<PATH_TO_YOUR_DATA_FOLDER>')
+tcg_min = stack('<PATH_TO_YOUR_DATA_FOLDER>')
 
-tcw_max = stack("L:/STUDIUM_Global_Change_Geography/Earth_Observation/S06/data/spectemp/TCW/TCW_max.img")
-tcw_p50 = stack("L:/STUDIUM_Global_Change_Geography/Earth_Observation/S06/data/data/spectemp/TCW/TCW_p50.img")
+tcw_max = stack('<PATH_TO_YOUR_DATA_FOLDER>')
+tcw_p50 = stack('<PATH_TO_YOUR_DATA_FOLDER>')
 
 spectemp = stack(ndvi_mean,ndvi_iqr,tcb_p75,tcb_p25,tcg_std,tcg_min,tcw_max,tcw_p50)
 
@@ -220,8 +220,8 @@ writeRaster(classified_spectemp,filename = "Classified_SpecTemp_Forest",format= 
 # 8)
 #############################################################################
 #Validation
-ref_td = readOGR(dsn = "L:/STUDIUM_Global_Change_Geography/Earth_Observation/S06/data/validation", 
-                 layer = "validation_sample" )
+ref_td = readOGR(dsn = '<PATH_TO_YOUR_DATA_FOLDER>', 
+                 layer = '<LAYER_NAME' )
 
 #Create data frame
 ref_td = raster::extract(classified_0, ref.td, sp =T)
