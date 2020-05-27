@@ -14,7 +14,7 @@ library(rgdal)
 rasterOptions(maxmemory = 1e6)
 
 # Define the folder that contains your data...
-data.path <- 'L:/STUDIUM_Global_Change_Geography/M5_Earth_Observation/Seminar/S03/data/training_data'
+data.path <- '<PATH_TO_YOUR_DATA_FOLDER>'
 
 #############################################################################
 # 4) Load your shape using readOGR(). Extract the spatial values at your point
@@ -25,10 +25,10 @@ data.path <- 'L:/STUDIUM_Global_Change_Geography/M5_Earth_Observation/Seminar/S0
 # as columns (i.e. point id, classID, confiID, and 6 spectral bands).
 #############################################################################
 
-training_data <-readOGR(dsn= 'L:/STUDIUM_Global_Change_Geography/M5_Earth_Observation/Seminar/S03/data/training_data', layer="training_data")
+training_data <-readOGR(dsn= ''<PATH_TO_YOUR_DATA_FOLDER>', layer="<name_of_your_layer")
 plot(training_data)
 
-sr.march <- stack("L:/STUDIUM_Global_Change_Geography/M5_Earth_Observation/Seminar/S03/data/sr_data/LC081890252014031001T1-SC20170927101754/LC081890252014031001T1-SC20170927101754_sr_masked_crop.envi")
+sr.march <- stack('<PATH_TO_YOUR_file.envi>')
 spatial_values <- extract(sr.march, training_data, sp = TRUE)
 sr.march <- as.data.frame(spatial_values)
 
