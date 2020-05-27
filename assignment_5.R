@@ -1,6 +1,6 @@
 #############################################################################
 # MSc Earth Observation Exercise 5
-# [Derenthal, Schmitt, Streif]
+# [Schmitt]
 #############################################################################
 # Selected approach: post-classification comparison (you perform a 
 # classification of land cover for each composite dataset. You then use raster 
@@ -16,7 +16,7 @@ library(randomForest)
 rasterOptions(maxmemory = 1e6)
 
 # define the folder that contains your data...
-data.path <- "L:/STUDIUM_Global_Change_Geography/Earth_Observation/S05/data/"
+data.path <- '<PATH_TO_YOUR_DATA_FOLDER>'
 
 folders <- dir(data.path)
 list1 <- list.files(paste0(data.path, folders[1]), full.names = TRUE)
@@ -81,7 +81,7 @@ tc_10 <- stack(sum(im10_sta * tcc[,1]), sum(im10_sta * tcc[,2]), sum(im10_sta * 
 # 40 non-forest: ClassID 0
 # 40 forest: ClassID 1 
 
-td_00 <- readOGR(dsn = "L:/STUDIUM_Global_Change_Geography/Earth_Observation/S05/data/training" , layer = "train_2000")
+td_00 <- readOGR(dsn = "'<PATH_TO_YOUR_DATA_FOLDER>'" , layer = "<LAYER_NAME>")
 
 #############################################################################
 # 4) Model Training & Classification
@@ -121,7 +121,7 @@ all_stack <- stack((classified_00 * 100) + (classified_05 * 10) + classified_10)
 plot(all_stack)
 freq(all_stack)
 
-writeRaster(all_stack, "L:/STUDIUM_Global_Change_Geography/Earth_Observation/S05/data/all_stack.envi", format = "ENVI", datatype="INT2S", overwrite = T)
+writeRaster(all_stack, "'<PATH_TO_YOUR_FILE.envi'", format = "ENVI", datatype="INT2S", overwrite = T)
 #############################################################################
 # 5) Change Map Validation & Area Estimates
 # a. We provided reference data for the study area as a shapefile. Use it to
@@ -132,8 +132,8 @@ writeRaster(all_stack, "L:/STUDIUM_Global_Change_Geography/Earth_Observation/S05
 #############################################################################
 
 # load reference data
-ref_td <- readOGR(dsn = "L:/STUDIUM_Global_Change_Geography/Earth_Observation/S05/data/validation", 
-                 layer = "validation_points" )
+ref_td <- readOGR(dsn = '<PATH_TO_YOUR_DATA_FOLDER>', 
+                 layer = "<LAYER_NAME>" )
 
 # create data frame
 ref_td_0 <- raster::extract(all_stack, ref_td, sp =T)
@@ -179,12 +179,3 @@ OverAcc <- sum(sums)/sum(confma)
 class_prop <- raster::freq(all_stack, useNA = "no")
 class_prop$layer
 
-#######################################################################
-# 6) Reporting Results The report of your results should include:
-# a. an illustration of your selected approach
-# b. the change map with appropriate class colors, a legend and scale
-# c. at least three image chips of selected subsets of your study area
-# d. area estimates and statistics (e.g. how much of the total forest in 
-# the study region was deforested per period)
-# e. an accuracy assessment following the good practice recommendations.
-########################################################################
