@@ -13,7 +13,7 @@ source('O:/Student_Data/Schmitt_Lara/S08/code/parametric_compositing.R')
 rasterOptions(maxmemory = 1e6)
 
 ######## Define the folder that contains your data...
-data.path <- 'O:/Student_Data/Schmitt_Lara/S08/data/'
+data.path <- '<PATH_TO_YOUR_DATA_FOLDER>'
 
 #############################################################################
 # 1)
