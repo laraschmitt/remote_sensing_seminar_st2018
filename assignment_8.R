@@ -7,7 +7,7 @@
 library(raster)
 library(lubridate)
 library(ggplot2)
-source('O:/Student_Data/Schmitt_Lara/S08/code/parametric_compositing.R')
+source('./parametric_compositing.R')
 
 # Change raster options to store large rasters in temp files on disk
 rasterOptions(maxmemory = 1e6)
