@@ -17,7 +17,7 @@ require(rasterVis)
 rasterOptions(maxmemory = 1e6)
 
 # Define the folder that contains your data...
-data.path <- 'L:/STUDIUM_Global_Change_Geography/Earth_Observation/S04/data/training_data_shapef'
+data.path <- '<PATH_TO_YOUR_DATA_FOLDER>'
 
 #############################################################################
 # 1) Load the training data points that you collected during the last exercise 
@@ -29,8 +29,8 @@ data.path <- 'L:/STUDIUM_Global_Change_Geography/Earth_Observation/S04/data/trai
 #############################################################################
 
 #Load training data points and the March image 
-td <- readOGR('L:/STUDIUM_Global_Change_Geography/Earth_Observation/S04/data/training_data_shapef')
-sr_m <- stack ("L:/STUDIUM_Global_Change_Geography/Earth_Observation/S04/data/sr_data/LC081890252014031001T1-SC20170927101754/LC081890252014031001T1-SC20170927101754_sr_masked_crop.envi")
+td <- readOGR('<PATH_TO_YOUR_DATA_FOLDER>')
+sr_m <- stack ('<PATH_TO_YOUR_file.envi>')
 
 #Create data frame
 # extract(x= raster object, y = points represented by a two-column matrix or data.frame or spatial points,
@@ -75,14 +75,14 @@ td_m.rf <- randomForest(x = td_m.df[,3:8], y = td_m.df[,1])
 #############################################################################
 
 # create stacks 
-sr_m_aug <-stack("L:/STUDIUM_Global_Change_Geography/Earth_Observation/S04/data/sr_data/LC081890252014031001T1-SC20170927101754/LC081890252014031001T1-SC20170927101754_sr_masked_crop.envi",
-                        "L:/STUDIUM_Global_Change_Geography/Earth_Observation/S04/data/sr_data/LC081890252014110501T1-SC20170927102137/LC081890252014110501T1-SC20170927102137_sr_masked_crop.envi"
-                        )
+sr_m_aug <-stack('<PATH_TO_YOUR_file1.envi>',
+                 '<PATH_TO_YOUR_file2.envi>' 
+                )
 
-sr_m_aug_nov <- stack("L:/STUDIUM_Global_Change_Geography/Earth_Observation/S04/data/sr_data/LC081890252014031001T1-SC20170927101754/LC081890252014031001T1-SC20170927101754_sr_masked_crop.envi",
-                             "L:/STUDIUM_Global_Change_Geography/Earth_Observation/S04/data/sr_data/LC081890252014110501T1-SC20170927102137/LC081890252014110501T1-SC20170927102137_sr_masked_crop.envi",
-                             "L:/STUDIUM_Global_Change_Geography/Earth_Observation/S04/data/sr_data/LC081890252015082001T1-SC20170927120710/LC081890252015082001T1-SC20170927120710_sr_masked_crop.envi"
-)
+sr_m_aug_nov <- stack('<PATH_TO_YOUR_file1.envi>',
+                      '<PATH_TO_YOUR_file2.envi>', 
+                      '<PATH_TO_YOUR_file3.envi>'
+                     )
 
 #Create data frame
 td_m_aug = raster::extract(sr_m_aug, td, sp =T)
@@ -180,7 +180,7 @@ predict(sr_m_aug_nov, best.rf, "classified_map", format = "ENVI", overwrite=T)
 #############################################################################
 
 # load validation points
-valid_points <- readOGR("L:/STUDIUM_Global_Change_Geography/Earth_Observation/S04/data/validation")
+valid_points <- readOGR('<PATH_TO_YOUR_DATA_FOLDER>')
 
 #Extract values 
 map_values = raster::extract(sr_m_aug_nov, valid_points, sp =T)
@@ -195,7 +195,7 @@ map_values.rf = randomForest(x = map_values.df[,2:19], y = map_values.df[,1] )
 predict(sr_m_aug_nov,map_values.rf, "valid_map", format = "ENVI", overwrite = T)
 
 #Load raster
-class_raster <- raster("L:/STUDIUM_Global_Change_Geography/Earth_Observation/S04/classified_map.envi")
+class_raster <- raster('<PATH_TO_YOUR_FILE.envi>')
 
 #Extract values 
 combined <- raster::extract(class_raster, valid_points, sp =T) 
