@@ -97,8 +97,8 @@ freq(BQA)
 
 #############################################################################
 # 7) The band contains integer values. By decoding the integer values into 16 bit binary strings, we can read 
-# the quality information for each pixel-
-# Use tje intToBits()function to decode the three BQA values from 6) and decipher their meaning
+# the quality information for each pixel.
+# Use the intToBits()function to decode the three BQA values from 6) and decipher their meaning
 #using the Landsat quality band documentation (https://landsat.usgs.gov/collectionqualityband)
 #############################################################################
 
