@@ -103,7 +103,7 @@ td_m_aug_nov.df <- na.omit(td_m_aug_nov.df)
 td_m_aug_nov.rf <- randomForest(x = td_m_aug_nov.df[,3:20], y = td_m_aug_nov.df[,1])
 
 #############################################################################
-# 5)	Assess the out of bad (OOB) error estimates of the three trained models
+# 5)	Assess the out of bag (OOB) error estimates of the three trained models
 # (2, 4a, 4b).
 # a) Which model has the lowest OOB error?
 # b) How does the OOB behave when increasing the number of trees in your model 
